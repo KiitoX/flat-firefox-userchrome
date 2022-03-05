@@ -1,0 +1,25 @@
+
+/*** Breeze lookalike input[type=range] ***/
+input[type="range"] {
+    appearance: none;
+    background: transparent;
+    --range-height: 5px;
+}
+::-moz-range-track,
+::-moz-range-progress {
+  height: var(--range-height);
+  border-radius: calc(var(--range-height) / 2);
+}
+::-moz-range-track {
+  background: #b5b5b6;
+}
+::-moz-range-progress {
+  background: #3daee9;
+}
+::-moz-range-thumb {
+  border-width: 1px;
+}
+::-moz-range-thumb:hover {
+  border-color: #3daee9;
+}
+ 
