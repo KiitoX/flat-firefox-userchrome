@@ -302,8 +302,11 @@ menupopup > menuitem, menupopup > menu {
 #TabsToolbar {
     padding-right: 8px !important;
 }
+#TabsToolbar .toolbarbutton-1 {
+    margin: 0 2px !important;
+}
 #tabbrowser-tabs {
-    --toolbarbutton-inner-padding: 3px;
+    --toolbarbutton-inner-padding: 4px;
 }
 #tabbrowser-arrowscrollbox::part(scrollbutton-up),
 #tabbrowser-arrowscrollbox::part(scrollbutton-down) {
