@@ -46,10 +46,29 @@
 	
 	/* black browser container background */
 
-	--tabpanel-background-color: black;
+	--tabpanel-background-color: black !important;
   }
 
+:root[privatebrowsingmode="temporary"] {
+    --private-hlcolor: #A884DD;
+}
+:root[privatebrowsingmode="temporary"] .browser-toolbar#nav-bar:not(.titlebar-color) {
+    background-image: linear-gradient(to bottom, var(--private-hlcolor), 67%, var(--toolbar-bgcolor)) !important;
+}
+:root[privatebrowsingmode="temporary"] .tab-background[selected=true] {
+    background-image: linear-gradient(to top, var(--private-hlcolor), 3px, var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) 6px) !important;
+}
+.private-browsing-indicator {
+    display: none;
+}
 
+@media (prefers-color-scheme: dark) {
+  :host, :root {
+	  --in-content-primary-button-background: rgb(80, 140, 255) !important;
+	  --in-content-primary-button-background-hover: rgb(120, 180, 255) !important;
+	  /* --in-content-primary-button-background-active */
+  }
+}
 
   /*** URL bar enlargement or lack thereof ***/
 
@@ -254,26 +273,26 @@ menupopup > menuitem, menupopup > menu {
     --tab-min-height: 31px;
 }
 #main-window[uidensity="compact"]  {
-    --tab-min-height: 31px !important;
+    --tab-min-height: 32px !important;
     --bookmark-block-padding: 2px;
 }
 
 .tab-background {
     border-radius: 0px !important;
-    border: none !important;
-    margin-block: 1px 0 !important;
-}
-.tab-background:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) {
-    outline: 1px solid rgba(0, 0, 0, .20) !important;
+    border-block: none !important;
+    border-inline: 1px solid rgba(0, 0, 0, .20) !important;
+    margin-block: 0px !important;
+    margin-inline-end: -1px !important;
+    box-sizing: border-box;
 }
 /* For dark backgrounds */
 [brighttext="true"] .tab-background {
-    outline-color: var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
+    border-color: var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
 }
 /* Remove padding between tabs */
 .tabbrowser-tab {
-    padding-left: 0 !important;
-    padding-right: 1px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     margin-top: 0px !important;
 }
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
