@@ -1,334 +1,144 @@
-/*** Megabar Styler General - version 2020-04-19 ***/
+/*
+ * The Rewrite 2022-10-22
+ *
+ * url bar tweaks loosely based on https://www.userchrome.org/megabar-styling-firefox-address-bar.html
+ */
 
-
-
-  /*** General Preferences ***/
-
-  :root {
-
-    /* Number of pixels of enlargement when URL bar is focused */
-
-    --mbarstyler-popout-pixels: 1px; /* [0px - 7px] */
-
-
-
-    /* Top Bar Display or Not */
-
-    --mbarstyler-top-bar-display: block; /* [block,none] */
-
-
-
-    /* Font sizes (default: 13.8px for title, 10.2px for URL) */
-
-    --mbarstyler-title-font-size: 13px; /* [13px - 18px] */
-
-    --mbarstyler-url-font-size: 12px; /* [12px - 16px] */
-
-
-
-    /* Rows to show without scrolling */
-
-    --mbarstyler-max-rows-without-scrolling: 15;
-
-
-
-    /* Bottom border for each result row */
-
-    --mbarstyler-bottom-border-width: 0px; /* [0px or 1px] */
-
-    
-
-    /* Match display style */
-
-    --mbarstyler-match-weight: 700; /* [400,700] */
-
-    --mbarstyler-match-background-opacity: 0.0; /* [0.0,0.05,0.1] */
-	
-	/* black browser container background */
-
-	--tabpanel-background-color: black !important;
-  }
-
-:root[privatebrowsingmode="temporary"] {
-    --private-hlcolor: #A884DD;
+/* Add some space above the bookmarks list */
+#main-window {
+  --bookmark-block-padding: 2px !important;
 }
-:root[privatebrowsingmode="temporary"] .browser-toolbar#nav-bar:not(.titlebar-color) {
-    background-image: linear-gradient(to bottom, var(--private-hlcolor), 67%, var(--toolbar-bgcolor)) !important;
+/* Reduce tab spacing and size */
+#main-window {
+  --tab-block-margin: 0px !important;
+  --inline-tab-padding: 8px !important;
+  --tab-min-height: 32px !important;
 }
-:root[privatebrowsingmode="temporary"] .tab-background[selected=true] {
-    background-image: linear-gradient(to top, var(--private-hlcolor), 3px, var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) 6px) !important;
+/* Remove tab border radius */
+#tabbrowser-tabs tab,
+#TabsToolbar toolbarbutton {
+  --tab-border-radius: 0px !important;
 }
-.private-browsing-indicator {
-    display: none;
+/* Remove spacing between tabs */
+#tabbrowser-tabs .tabbrowser-tab {
+  padding-inline: 0px !important;
 }
-
-@media (prefers-color-scheme: dark) {
-  :host, :root {
-	  --in-content-primary-button-background: rgb(80, 140, 255) !important;
-	  --in-content-primary-button-background-hover: rgb(120, 180, 255) !important;
-	  /* --in-content-primary-button-background-active */
-  }
-}
-
-  /*** URL bar enlargement or lack thereof ***/
-
-
-
-  /* Compute new position, width, and padding */
-
-  #urlbar[breakout][breakout-extend] {
-
-    top: calc(5px - var(--mbarstyler-popout-pixels)) !important;
-
-    left: calc(0px - var(--mbarstyler-popout-pixels)) !important;
-
-    width: calc(100% + (2 * var(--mbarstyler-popout-pixels))) !important;
-
-    padding: var(--mbarstyler-popout-pixels) !important;
-
-  }
-
-  [uidensity="compact"] #urlbar[breakout][breakout-extend] {
-
-    top: calc(3px - var(--mbarstyler-popout-pixels)) !important;
-
-  }
-
-  [uidensity="touch"] #urlbar[breakout][breakout-extend] {
-
-    top: calc(4px - var(--mbarstyler-popout-pixels)) !important;
-
-  }
-
-
-
-  /* Prevent shift of URL bar contents */
-
-  #urlbar[breakout][breakout-extend] > #urlbar-input-container {
-
-    height: var(--urlbar-height) !important;
-
-    padding: 0 !important;
-
-  }
-
-
-
-  /* Do not animate */
-
-  #urlbar[breakout][breakout-extend] > #urlbar-background {
-
-    animation: none !important;;
-
-  }
-
-
-
-  /* Remove shadows */
-
-  #urlbar[breakout][breakout-extend] > #urlbar-background {
-
-    box-shadow: none !important;
-
-  }
-
-
-
-  /*** Top "Blue Bar" Display ***/
-
-
-
-  .urlbarView-row:first-of-type {
-
-    display: var(--mbarstyler-top-bar-display) !important;
-
-  }
-
-
-
-  /*** Font Sizes and Scrolling ***/
-
-
-
-  /* Title font-size */
-
-  .urlbarView-row .urlbarView-title {
-
-    font-size: var(--mbarstyler-title-font-size) !important;
-
-  }
-
-
-
-  /* URL / action font-size */
-
-  .urlbarView-row .urlbarView-secondary,
-
-  .urlbarView-row .urlbarView-url,
-
-  .urlbarView-row .urlbarView-action {
-
-    font-size: var(--mbarstyler-url-font-size) !important;
-
-  }
-
-
-
-  /* Set max-height for items visible without scrolling */
-
-  #urlbarView-results, #urlbar-results {
-
-    height: unset !important;
-
-    max-height: calc(2.5 * (var(--mbarstyler-title-font-size) + var(--mbarstyler-bottom-border-width)) * var(--mbarstyler-max-rows-without-scrolling)) !important;
-
-  }
-
-  #urlbar-results {
-
-    overflow-y: auto !important; 
-
-  }
-
-
-
-  /* Clean up extra spacing at the top and bottom */  
-
-  #urlbar-results {
-
-    padding-top: 0 !important;
-
-    padding-bottom: 0 !important;
-
-  }
-
-
-
-  /* Subtle border between results */
-
-  .urlbarView-row:not(:last-of-type) {
-
-    border-bottom: var(--mbarstyler-bottom-border-width) solid rgba(0, 0, 0, 0.1) !important;
-
-  }
-
-
-
-  /* Match Styling Like Fx43-47 */
-
-  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-title strong,
-
-  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-url strong {
-
-    font-weight: var(--mbarstyler-match-weight) !important;
-
-    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, calc(var(--mbarstyler-match-background-opacity) * 2));
-
-    background-color: rgba(0, 0, 0, var(--mbarstyler-match-background-opacity));
-
-    border-radius: 2px;
-
-  }
-
-  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-title strong,
-
-  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-url strong {
-
-    font-weight: var(--mbarstyler-match-weight) !important;
-
-    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, calc(var(--mbarstyler-match-background-opacity) * 2));
-
-    background-color: rgba(255, 255, 255, var(--mbarstyler-match-background-opacity));
-
-    border-radius: 2px;
-
-  }
-
-
-
-/*** End of: Megabar Styler General ***/
-
-
-
-/*** Tighten up drop-down/context/popup menu spacing, and toolbar icon spacing ***/
-
-menupopup > menuitem, menupopup > menu {
-    padding-block: 4px !important;
-}
-:root {
-    --arrowpanel-menuitem-padding: 4px 8px !important;
-    --toolbar-start-end-padding: 4px;
-    --toolbarbutton-outer-padding: 1px;
-}
-#urlbar-container, #search-container {
-    margin-inline: 2px;
-}
-
-
-/*** Proton Tabs Tweaks ***/
-
-/* Adjust tab corner shape, borders, and remove space below tabs */
-
-:root {
-    --tab-min-height: 31px;
-}
-#main-window[uidensity="compact"]  {
-    --tab-min-height: 32px !important;
-    --bookmark-block-padding: 2px;
-}
-
-.tab-background {
-    border-radius: 0px !important;
-    border-block: none !important;
-    border-inline: 1px solid rgba(0, 0, 0, .20) !important;
-    margin-block: 0px !important;
-    margin-inline-end: -1px !important;
-    box-sizing: border-box;
-}
-/* For dark backgrounds */
-[brighttext="true"] .tab-background {
-    border-color: var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
-}
-/* Remove padding between tabs */
-.tabbrowser-tab {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    margin-top: 0px !important;
-}
+/* Remove spacing between regular and pinned tabs */
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
-    /* Remove the gap between the last pinned tab and the first visible tab */
-    margin-inline-start: 0px !important; /* .tabbrowser-tab sets margin: 0 !important; */
-}
-#TabsToolbar {
-    padding-right: 8px !important;
-}
-#TabsToolbar .toolbarbutton-1 {
-    margin: 0 2px !important;
-}
-#tabbrowser-tabs {
-    --toolbarbutton-inner-padding: 4px;
-}
-#tabbrowser-arrowscrollbox::part(scrollbutton-up),
-#tabbrowser-arrowscrollbox::part(scrollbutton-down) {
-    padding: 0px !important;
-}
-.tabbrowser-tab[visuallyselected="true"] {
-    overflow-y: clip;
-}
-.tab-label-container {
-    padding-bottom: 2px;
-    height: unset !important;
-}
-.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-    padding: 0 !important;
-    margin-left: 20px !important;
-    scale: 1.1;
-}
-:root[uidensity="compact"] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay),
-#tabbrowser-tabs[secondarytext-unsupported] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay),
-:root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
-:root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
-    opacity: unset !important;
+  margin-inline-start: 0px !important;
 }
 
-/* Tweak Options as of 5/30/2021; Generated Wed Jun 02 2021 10:04:13 GMT+0200 (Central European Summer Time) */
+/* Offset tab content to account for bottom border, add radius to buttons */
+#tabbrowser-tabs .tab-content {
+  --tab-border-radius: var(--toolbarbutton-border-radius) !important;
+  margin-block-end: 1px !important;
+}
+/* Narrow text height & baseline offset */
+#tabbrowser-tabs .tab-label-container {
+  height: unset !important;
+  padding-block-end: 2px !important;
+}
+
+/* Add border between tabs */
+#tabbrowser-tabs .tabbrowser-tab .tab-background {
+  border-inline-end: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
+}
+/* Add left border on first, and selected tab */
+:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) #tabbrowser-tabs .tabbrowser-tab[first-visible-tab] .tab-background,
+#tabbrowser-tabs .tabbrowser-tab[selected] .tab-background,
+#tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[first-visible-unpinned-tab] .tab-background {
+  border-inline-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
+}
+/* Offset tab content to account for side border */
+#tabbrowser-tabs .tabbrowser-tab .tab-content {
+  margin-inline: 0.5px 1.5px !important;
+}
+/* Negative offset on selected tab to overlay the left border */
+#tabbrowser-tabs .tabbrowser-tab:is([selected]):not([first-visible-tab]) .tab-background {
+  margin-inline-start: -1.5px !important;
+}
+
+/* Remove selected tab shadow, darken the border to account for lighter background color */
+#TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon,
+#tabbrowser-tabs .tab-background:is([selected], [multiselected]) {
+  border-inline-color: color-mix(in srgb, currentColor 35%, transparent) !important;
+  box-shadow: unset !important;
+}
+
+/* Remove firefox view separator spacing */
+:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) :is(#firefox-view-button, #wrapper-firefox-view-button) + #tabbrowser-tabs {
+  border: unset !important;
+  padding-inline-start: var(--tab-overflow-pinned-tabs-width) !important;
+  margin-inline-start: 0px !important;
+}
+
+/* Set min height on absolute pinned tabs to overlay bottom border */
+#tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[selected] .tab-content {
+  min-height: var(--tab-min-height) !important;
+}
+
+/* Less spacing around tab bar buttons (new tab, list tabs) */
+#TabsToolbar toolbarbutton:not([role="tab"]) {
+  --toolbarbutton-inner-padding: 4px !important;
+  --tab-border-radius: var(--toolbarbutton-border-radius) !important;
+  border: 4px solid transparent !important;
+}
+
+/* Move audio playing/muted indicator */
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
+  padding: 0 !important;
+  margin-left: 20px !important;
+  scale: 1.1;
+}
+/* Do not hide favicon if audio indicator is shown */
+.tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
+  opacity: unset !important;
+}
+
+/* Compute url bar position, width, and padding */
+#urlbar[breakout][breakout-extend] {
+  /* Number of pixels of enlargement when url bar is focused */
+  --mbarstyler-popout-pixels: 2px;
+  
+  top: calc(4px - var(--mbarstyler-popout-pixels)) !important;
+  left: calc(1px - var(--mbarstyler-popout-pixels)) !important;
+  width: calc(100% + var(--mbarstyler-popout-pixels)) !important;
+  padding: var(--mbarstyler-popout-pixels) !important;
+}
+
+/* Prevent shift of url bar contents */
+#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+  height: var(--urlbar-height) !important;
+  padding: 0 !important;
+}
+
+/* Compact url bar suggestions */
+#urlbar .urlbarView {
+  --urlbar-container-padding: -4px !important;
+  --urlbarView-item-inline-padding: 6px !important;
+}
+#urlbar .urlbarView-row-inner {
+  padding-block: 4px !important;
+}
+/* Clean up extra spacing at the top and bottom */
+#urlbar .urlbarView-results {
+  padding-block: 0 !important;
+}
+/* Compact search engine selection */
+#urlbar .search-one-offs:not([hidden]) {
+  padding-block: 2px !important;
+}
+
+/* No margin on last item */
+.urlbar-page-action:last-of-type, #urlbar-go-button:last-of-type, .search-go-button:last-of-type {
+  margin-inline-end: 0 !important;
+}
+
+:root {
+  /* Compact toolbar icons */
+  --toolbar-start-end-padding: 4px !important;
+  --toolbarbutton-outer-padding: 0px !important;
+
+  /* Nicer menu spacing */
+  --arrowpanel-menuitem-padding-block: 4px !important;
+}
