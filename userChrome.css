@@ -28,15 +28,13 @@
   margin-inline-start: 0px !important;
 }
 
-/* Offset tab content to account for bottom border, add radius to buttons */
+/* add radius to tab bar buttons */
 #tabbrowser-tabs .tab-content {
   --tab-border-radius: var(--toolbarbutton-border-radius) !important;
-  margin-block-end: 1px !important;
 }
-/* Narrow text height & baseline offset */
+/* Narrow text height */
 #tabbrowser-tabs .tab-label-container {
   height: unset !important;
-  padding-block-end: 2px !important;
 }
 
 /* Add border between tabs */
