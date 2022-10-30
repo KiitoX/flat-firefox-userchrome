@@ -4,6 +4,15 @@
  * url bar tweaks loosely based on https://www.userchrome.org/megabar-styling-firefox-address-bar.html
  */
 
+/* Fixed urlbar height (for some reason these are defined inline ???) */
+#urlbar-container {
+  --urlbar-container-height: 34px !important;
+}
+#urlbar {
+  --urlbar-toolbar-height: 34px !important;
+  --urlbar-height: 26px !important;
+}
+
 /* Add some space above the bookmarks list */
 #main-window {
   --bookmark-block-padding: 2px !important;
