@@ -39,11 +39,11 @@
 
 /* Add border between tabs */
 #tabbrowser-tabs .tabbrowser-tab .tab-background {
+  border-block-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
   border-inline-end: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
 }
-/* Add left border on first, and selected tab */
-:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden]) #tabbrowser-tabs .tabbrowser-tab[first-visible-tab] .tab-background,
-#tabbrowser-tabs .tabbrowser-tab[selected] .tab-background,
+/* Add left border on first tab, and first unpinned if tabs are scrolling */
+#tabbrowser-tabs .tabbrowser-tab[first-visible-tab] .tab-background,
 #tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[first-visible-unpinned-tab] .tab-background {
   border-inline-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
 }
@@ -51,15 +51,11 @@
 #tabbrowser-tabs .tabbrowser-tab .tab-content {
   margin-inline: 0.5px 1.5px !important;
 }
-/* Negative offset on selected tab to overlay the left border */
-#tabbrowser-tabs .tabbrowser-tab:is([selected]):not([first-visible-tab]) .tab-background {
-  margin-inline-start: -1.5px !important;
-}
 
 /* Remove selected tab shadow, darken the border to account for lighter background color */
 #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon,
 #tabbrowser-tabs .tab-background:is([selected], [multiselected]) {
-  border-inline-color: color-mix(in srgb, currentColor 35%, transparent) !important;
+  border-color: color-mix(in srgb, currentColor 35%, transparent) !important;
   box-shadow: unset !important;
 }
 
