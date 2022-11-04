@@ -48,6 +48,8 @@
 
 /* Add border between tabs */
 #tabbrowser-tabs .tabbrowser-tab .tab-background {
+  --lwt-selected-tab-background-color: var(--toolbar-bgcolor) !important;
+  
   border-block-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
   border-inline-end: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
 }
