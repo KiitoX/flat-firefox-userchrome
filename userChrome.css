@@ -22,6 +22,7 @@
   --tab-block-margin: 0px !important;
   --inline-tab-padding: 8px !important;
   --tab-min-height: 32px !important;
+  --window-drag-spacing: 12px !important;
 }
 /* Remove tab border radius */
 #tabbrowser-tabs tab,
@@ -53,7 +54,7 @@
   border-block-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
   border-inline-end: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
 }
-/* Add left border on first tab, and first unpinned if tabs are scrolling */
+/* Add left border on first tab, and first unpinned if tabs are overflowing */
 #tabbrowser-tabs .tabbrowser-tab[first-visible-tab] .tab-background,
 #tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[first-visible-unpinned-tab] .tab-background {
   border-inline-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
@@ -80,6 +81,26 @@
 /* Set min height on absolute pinned tabs to overlay bottom border */
 #tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[selected] .tab-content {
   min-height: var(--tab-min-height) !important;
+}
+
+/* Make drag space after add tab when tabs are overflowing */
+#tabbrowser-tabs[hasadjacentnewtabbutton][overflow="true"] ~ #new-tab-button {
+  margin-inline-end: var(--window-drag-spacing) !important;
+}
+/* Make drag space after add tab, when tabs are not overflowing */
+#tabbrowser-tabs:not([overflow="true"]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > spacer.closing-tabs-spacer {
+  min-width: var(--window-drag-spacing) !important;
+}
+/* Remove side padding around overflowing tabs */
+#tabbrowser-tabs[positionpinnedtabs] > #tabbrowser-arrowscrollbox::part(scrollbox) {
+  --tab-shadow-max-size: 0px !important;
+}
+/* Offset pinned tabs to accommodate for the removed padding */
+#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned="true"] {
+  transform: translateX(var(--tab-shadow-max-size)) !important;
+}
+#tabbrowser-tabs[positionpinnedtabs] .tab-content[pinned="true"] {
+  transform: translateY(1px) !important;
 }
 
 /* Less spacing around tab bar buttons (new tab, list tabs) */
