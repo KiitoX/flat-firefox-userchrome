@@ -22,6 +22,7 @@
   --tab-block-margin: 0px !important;
   --inline-tab-padding: 8px !important;
   --tab-min-height: 32px !important;
+  --window-drag-spacing: 16px !important;
 }
 /* Remove tab border radius */
 #tabbrowser-tabs tab,
@@ -82,23 +83,23 @@
   min-height: var(--tab-min-height) !important;
 }
 
-/* Decrease tab drag space */
-.titlebar-spacer[type="pre-tabs"],
-.titlebar-spacer[type="post-tabs"] {
-  width: 16px !important;
-}
-/* Always hide drag space before tabs */
-.titlebar-spacer[type="pre-tabs"] {
+/* Always hide built-in tab bar drag space *
+#tabbrowser-tabs .titlebar-spacer[type="pre-tabs"],
+#tabbrowser-tabs .titlebar-spacer[type="post-tabs"] {
   display: none !important;
+}*/
+/* Make drag space after add tab when tabs are overflowing */
+#tabbrowser-tabs[hasadjacentnewtabbutton][overflow="true"] ~ #new-tab-button {
+  margin-inline-end: var(--window-drag-spacing) !important;
 }
-/* Always show drag space after add tab button */
-.titlebar-spacer[type="post-tabs"] {
-  display: unset !important;
+/* Make drag space after add tab, when tabs are not overflowing */
+#tabbrowser-tabs:not([overflow="true"]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > spacer.closing-tabs-spacer {
+  min-width: var(--window-drag-spacing) !important;
 }
 
 /* Remove side padding around overflowing tabs */
 #tabbrowser-tabs[positionpinnedtabs] > #tabbrowser-arrowscrollbox::part(scrollbox) {
-  --tab-shadow-max-size: 0px !important;
+  padding-inline: 0px !important;
 }
 /* Offset pinned tabs to accommodate for the removed padding */
 #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned="true"] {
