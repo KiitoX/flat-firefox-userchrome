@@ -4,6 +4,11 @@
  * url bar tweaks loosely based on https://www.userchrome.org/megabar-styling-firefox-address-bar.html
  */
 
+/* Fix white blink background on new tabs */
+#browser .browserStack {
+  background-color: black !important;
+}
+
 /* Fixed urlbar height (for some reason these are defined inline ???) */
 #urlbar-container {
   --urlbar-container-height: 34px !important;
