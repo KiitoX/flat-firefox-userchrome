@@ -103,12 +103,12 @@
 }
 
 /* Remove side padding around overflowing tabs */
-#tabbrowser-tabs[positionpinnedtabs] > #tabbrowser-arrowscrollbox::part(scrollbox) {
-  padding-inline: 0px !important;
+#tabbrowser-tabs[positionpinnedtabs] > #tabbrowser-arrowscrollbox {
+  --tab-shadow-max-size: 0px !important;
 }
 /* Offset pinned tabs to accommodate for the removed padding */
 #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned="true"] {
-  transform: translateX(var(--tab-shadow-max-size)) !important;
+  transform: translateX(6px) !important; /* var(--tab-shadow-max-size) */
 }
 #tabbrowser-tabs[positionpinnedtabs] .tab-content[pinned="true"] {
   transform: translateY(1px) !important;
