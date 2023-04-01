@@ -29,6 +29,10 @@
   --tab-min-height: 32px !important;
   --window-drag-spacing: 16px !important;
 }
+/* Increase min tab width */
+#tabbrowser-tabs {
+  --tab-min-width: 100px !important;
+}
 /* Remove tab border radius */
 #tabbrowser-tabs tab,
 #TabsToolbar toolbarbutton {
@@ -43,7 +47,7 @@
   margin-inline-start: 0px !important;
 }
 
-/* add radius to tab bar buttons */
+/* Add radius to tab bar buttons */
 #tabbrowser-tabs .tab-content {
   --tab-border-radius: var(--toolbarbutton-border-radius) !important;
 }
