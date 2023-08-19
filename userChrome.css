@@ -38,14 +38,6 @@
 #TabsToolbar toolbarbutton {
   --tab-border-radius: 0px !important;
 }
-/* Remove spacing between tabs */
-#tabbrowser-tabs .tabbrowser-tab {
-  padding-inline: 0px !important;
-}
-/* Remove spacing between regular and pinned tabs */
-#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
-  margin-inline-start: 0px !important;
-}
 
 /* Add radius to tab bar buttons */
 #tabbrowser-tabs .tab-content {
@@ -65,12 +57,21 @@
 }
 /* Add left border on first tab, and first unpinned if tabs are overflowing */
 #tabbrowser-tabs .tabbrowser-tab[first-visible-tab] .tab-background,
-#tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab[first-visible-unpinned-tab] .tab-background {
+#tabbrowser-tabs[haspinnedtabs][positionpinnedtabs] .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) .tab-background {
   border-inline-start: 1px solid color-mix(in srgb, currentColor 25%, transparent) !important;
 }
 /* Offset tab content to account for side border */
 #tabbrowser-tabs .tabbrowser-tab .tab-content {
   margin-inline: 0.5px 1.5px !important;
+}
+
+/* Remove spacing between tabs */
+#tabbrowser-tabs .tabbrowser-tab {
+  padding-inline: 0px !important;
+}
+/* Remove spacing between regular and pinned tabs */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+  margin-inline-start: 0px !important;
 }
 
 /* Remove selected tab shadow, darken the border to account for lighter background color */
