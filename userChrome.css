@@ -14,7 +14,6 @@
   --urlbar-container-height: 34px !important;
 }
 #urlbar {
-  --urlbar-toolbar-height: 34px !important;
   --urlbar-height: 26px !important;
 }
 
@@ -139,17 +138,13 @@
 
 /* Compute url bar position, width, and padding */
 #urlbar[breakout][breakout-extend] {
-  /* Number of pixels of enlargement when url bar is focused */
-  --mbarstyler-popout-pixels: 2px;
-  
-  top: calc(4px - var(--mbarstyler-popout-pixels)) !important;
-  left: calc(1px - var(--mbarstyler-popout-pixels)) !important;
-  width: calc(100% + var(--mbarstyler-popout-pixels)) !important;
-  padding: var(--mbarstyler-popout-pixels) !important;
+  --urlbar-margin-inline: 0px !important;
+  /* For some reason this offset is now set inline as well? */
+  top: 36px !important;
 }
 
 /* Prevent shift of url bar contents */
-#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+#urlbar[breakout][breakout-extend] > .urlbar-input-container {
   height: var(--urlbar-height) !important;
   padding: 0 !important;
 }
