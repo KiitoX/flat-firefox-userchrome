@@ -98,12 +98,17 @@
   display: none !important;
 }*/
 /* Make drag space after add tab when tabs are overflowing */
-#tabbrowser-tabs[hasadjacentnewtabbutton][overflow="true"] ~ #new-tab-button {
+#tabbrowser-tabs[hasadjacentnewtabbutton][overflow] ~ #new-tab-button {
   margin-inline-end: var(--window-drag-spacing) !important;
 }
 /* Make drag space after add tab, when tabs are not overflowing */
-#tabbrowser-tabs:not([overflow="true"]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > spacer.closing-tabs-spacer {
+#tabbrowser-tabs:not([overflow]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > spacer.closing-tabs-spacer {
   min-width: var(--window-drag-spacing) !important;
+}
+
+/* Remove margin after pinned tabs */
+#pinned-tabs-container[orient="horizontal"] {
+  margin-inline-end: 0 !important;
 }
 
 /* Remove side padding around overflowing tabs */
